@@ -132,4 +132,8 @@ public class PlayerController : MonoBehaviour
           //  transform.Rotate(0f, 180f, 0f);
         }
     }
+    public bool IsFacingRight()
+    {
+        return isFacingRight;
+    }
 }
