@@ -5,7 +5,7 @@ public class EnemyAI : MonoBehaviour
     public int health = 2;
     public GameObject deathEffectPrefab;
 
-    public void TakeDamage(int damage)
+    public void TakeDamage(int damage) //TODO: change this to bullet damage
     {
         health -= damage;
 

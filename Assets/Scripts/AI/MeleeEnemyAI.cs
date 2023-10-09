@@ -28,7 +28,7 @@ public class MeleeEnemyAI : EnemyAI
             PlayerHealth playerHealth = player.GetComponent<PlayerHealth>();
             if (playerHealth != null)
             {
-                playerHealth.TakeDamage(1);
+                playerHealth.TakeDamage(1); //TODO: change this to explosion damage
             }
 
             Die();

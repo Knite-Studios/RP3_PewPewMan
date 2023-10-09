@@ -21,7 +21,7 @@ public class Bullet : MonoBehaviour
             EnemyAI enemy = collision.gameObject.GetComponent<EnemyAI>();
             if (enemy != null)
             {
-                enemy.TakeDamage(damage);
+                enemy.TakeDamage(damage);//TODO: change this to bullet damage
             }
             Destroy(gameObject);
         }
