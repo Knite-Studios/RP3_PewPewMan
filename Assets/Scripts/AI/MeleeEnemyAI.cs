@@ -2,88 +2,81 @@ using UnityEngine;
 
 public class MeleeEnemyAI : EnemyAI
 {
-    public float patrolDistanceLeft = 3f; // Distance to patrol to the left from the starting position.
-    public float patrolDistanceRight = 3f; // Distance to patrol to the right from the starting position.
-    private float leftBoundary;
-    private float rightBoundary;
-    private bool movingRight = true;
     public float moveSpeed = 1.5f;
-    private Vector3 startingPosition;
-    public int explosionDamage = 10;
-    public ParticleSystem deathEffect;
+    public float detectionRadius = 5f;
+    public float explosionRadius = 1f;
+    private bool isFacingRight = true;
 
-    public Sprite normalSprite;
-    public Sprite damagedSprite;
-    private SpriteRenderer spriteRenderer;
+    private Transform player;
+    [SerializeField] private Transform groundCheck;
+    [SerializeField] private Transform wallCheck;
 
-    void Start()
+    private float groundDetectionDistance = 0.5f;
+    private float wallDetectionDistance = 0.5f;
+
+    private void Start()
     {
-        startingPosition = transform.position;
-        leftBoundary = startingPosition.x - patrolDistanceLeft;
-        rightBoundary = startingPosition.x + patrolDistanceRight;
-        spriteRenderer = GetComponent<SpriteRenderer>();
+        player = GameObject.FindGameObjectWithTag("Player").transform;
     }
 
-    void Update()
+    private void Update()
     {
-        Patrol();
-    }
-
-    void Patrol()
-    {
-        if (movingRight && transform.position.x >= rightBoundary || 
-            !movingRight && transform.position.x <= leftBoundary)
+        // Player detection
+        float distanceToPlayer = Vector2.Distance(transform.position, player.position);
+        if (distanceToPlayer <= explosionRadius)
         {
-            movingRight = !movingRight;
+            // Get the PlayerHealth component and deal damage
+            PlayerHealth playerHealth = player.GetComponent<PlayerHealth>();
+            if (playerHealth != null)
+            {
+                playerHealth.TakeDamage(1);//damage amount
+            }
+
+            Die();
+        }
+        else if (distanceToPlayer <= detectionRadius)
+        {
+            ChasePlayer();
+        }
+        else
+        {
+            Patrol();
+        }
+    }
+
+    private void Patrol()
+    {
+        transform.Translate(Vector2.right * moveSpeed * Time.deltaTime * (isFacingRight ? 1 : -1));
+
+        // Ground and wall detection for turning around
+        bool groundAhead = Physics2D.Raycast(groundCheck.position, Vector2.down, groundDetectionDistance, LayerMask.GetMask("Ground"));
+        bool wallAhead = Physics2D.Raycast(wallCheck.position, transform.right, wallDetectionDistance, LayerMask.GetMask("Wall"));
+
+        if (!groundAhead || wallAhead)
+        {
             Flip();
         }
-
-        transform.Translate(Vector2.right * moveSpeed * Time.deltaTime * (movingRight ? 1 : -1));
     }
 
-    void Flip()
+    private void ChasePlayer()
     {
+        if (player.position.x > transform.position.x && !isFacingRight)
+        {
+            Flip();
+        }
+        else if (player.position.x < transform.position.x && isFacingRight)
+        {
+            Flip();
+        }
+        
+        transform.position = Vector2.MoveTowards(transform.position, new Vector2(player.position.x, transform.position.y), moveSpeed * Time.deltaTime);
+    }
+
+    private void Flip()
+    {
+        isFacingRight = !isFacingRight;
         Vector3 localScale = transform.localScale;
         localScale.x *= -1;
         transform.localScale = localScale;
-    }
-
-    public override void TakeDamage(int damage)
-    {
-        if (health == 2)
-        {
-            spriteRenderer.sprite = damagedSprite;
-        }
-
-        health -= damage;
-        if (health <= 0)
-        {
-            Die();
-        }
-    }
-
-    protected override void Die()
-    {
-        Instantiate(deathEffect, transform.position, Quaternion.identity);
-        Destroy(gameObject);
-    }
-
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.gameObject.CompareTag("Player"))
-        {
-            AttackPlayer(collision);
-            Die();
-        }
-    }
-
-    void AttackPlayer(Collider2D collision)
-    {
-        PlayerData playerData = collision.gameObject.GetComponent<PlayerController>().playerData;
-        if (playerData != null)
-        {
-            playerData.player.health -= explosionDamage;
-            playerData.player.health = Mathf.Max(playerData.player.health, 0);
-        }
     }
 }

@@ -3,7 +3,10 @@ guid: 722e779a4e772b342bce1c56bfbb228c
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - deathEffectPrefab: {fileID: 1738269795275418861, guid: cb6a7ff9282049c41a61bfee5dec361e, type: 3}
+  - groundCheck: {instanceID: 0}
+  - wallCheck: {instanceID: 0}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 
