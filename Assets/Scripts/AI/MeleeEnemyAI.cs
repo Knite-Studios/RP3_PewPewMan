@@ -21,15 +21,14 @@ public class MeleeEnemyAI : EnemyAI
 
     private void Update()
     {
-        // Player detection
         float distanceToPlayer = Vector2.Distance(transform.position, player.position);
+        
         if (distanceToPlayer <= explosionRadius)
         {
-            // Get the PlayerHealth component and deal damage
             PlayerHealth playerHealth = player.GetComponent<PlayerHealth>();
             if (playerHealth != null)
             {
-                playerHealth.TakeDamage(1);//damage amount
+                playerHealth.TakeDamage(1);
             }
 
             Die();
@@ -48,7 +47,6 @@ public class MeleeEnemyAI : EnemyAI
     {
         transform.Translate(Vector2.right * moveSpeed * Time.deltaTime * (isFacingRight ? 1 : -1));
 
-        // Ground and wall detection for turning around
         bool groundAhead = Physics2D.Raycast(groundCheck.position, Vector2.down, groundDetectionDistance, LayerMask.GetMask("Ground"));
         bool wallAhead = Physics2D.Raycast(wallCheck.position, transform.right, wallDetectionDistance, LayerMask.GetMask("Wall"));
 

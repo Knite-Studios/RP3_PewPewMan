@@ -9,9 +9,8 @@ public class EnemyAI : MonoBehaviour
     {
         health -= damage;
 
-        if (health == 1) // 50% health, or after the first shot
+        if (health == 1) // After the first shot
         {
-            // Make the enemy glow red for a second
             StartCoroutine(FlashRed());
         }
 
@@ -32,7 +31,7 @@ public class EnemyAI : MonoBehaviour
         }
     }
 
-    protected void Die()
+    protected virtual void Die()
     {
         Instantiate(deathEffectPrefab, transform.position, Quaternion.identity);
         Destroy(gameObject);
