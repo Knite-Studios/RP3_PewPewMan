@@ -4,8 +4,7 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    [SerializeField]
-    PlayerData playerData;
+    public PlayerData playerData;
 
     private float horizontal;
     private bool isFacingRight = true;
@@ -27,7 +26,9 @@ public class PlayerController : MonoBehaviour
     void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
+        playerData.player.health = playerData.player.MaxHealth;
     }
+
     private void Update()
     {
         horizontal = Input.GetAxisRaw("Horizontal");
@@ -61,7 +62,7 @@ public class PlayerController : MonoBehaviour
 
     private bool IsGrounded()
     {
-        return Physics2D.OverlapCircle(groundCheck.position, 0.2f,playerData.player.groundLayer);
+        return Physics2D.OverlapCircle(groundCheck.position, 0.2f, playerData.player.groundLayer);
     }
 
     private bool IsWalled()

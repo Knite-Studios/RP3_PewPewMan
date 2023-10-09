@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Bullet : MonoBehaviour
@@ -7,23 +5,29 @@ public class Bullet : MonoBehaviour
     private Rigidbody2D rb;
     [SerializeField]
     private float bulletSpeed = 1f;
-    // Start is called before the first frame update
+    [SerializeField]
+    private int damage = 1;
+
     void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
         rb.velocity = transform.right * bulletSpeed;
     }
-   /* private void OnTriggerEnter2D(Collider2D collision)
+
+    private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag("Enemy"))
         {
-            // damage enemy here
-            //collision.gameObject.GetComponent<EnemyAI>().TakeDamage();
+            EnemyAI enemy = collision.gameObject.GetComponent<EnemyAI>();
+            if (enemy != null)
+            {
+                enemy.TakeDamage(damage);
+            }
             Destroy(gameObject);
-        }else if (collision.gameObject.CompareTag("Wall"))
+        }
+        else if (collision.gameObject.CompareTag("Wall"))
         {
             Destroy(gameObject);
         }
-        
-    }*/
+    }
 }
