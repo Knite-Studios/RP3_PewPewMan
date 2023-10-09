@@ -6,18 +6,15 @@ public class MeleeEnemyAI : EnemyAI
     public float detectionRadius = 5f;
     public float explosionRadius = 1f;
     private bool isFacingRight = true;
+    [SerializeField] int damage = 50;
 
-    private Transform player;
+    [SerializeField] PlayerData playerData;
+    [SerializeField] private Transform player;
     [SerializeField] private Transform groundCheck;
     [SerializeField] private Transform wallCheck;
 
     private float groundDetectionDistance = 0.5f;
     private float wallDetectionDistance = 0.5f;
-
-    private void Start()
-    {
-        player = GameObject.FindGameObjectWithTag("Player").transform;
-    }
 
     private void Update()
     {
@@ -25,11 +22,12 @@ public class MeleeEnemyAI : EnemyAI
         
         if (distanceToPlayer <= explosionRadius)
         {
-            PlayerHealth playerHealth = player.GetComponent<PlayerHealth>();
-            if (playerHealth != null)
-            {
-                playerHealth.TakeDamage(1); //TODO: change this to explosion damage
-            }
+            // PlayerHealth playerHealth = player.GetComponent<PlayerHealth>();
+            /* if (playerHealth != null)
+             {
+                 playerHealth.TakeDamage(1); //TODO: change this to explosion damage
+             }*/
+            playerData.player.health -= damage;
 
             Die();
         }
