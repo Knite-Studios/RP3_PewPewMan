@@ -13,13 +13,19 @@ public class MeleeEnemyAI : EnemyAI
     [SerializeField] private Transform groundCheck;
     [SerializeField] private Transform wallCheck;
 
+    [SerializeField] EnemyHealthBar healthBar;
+
     private float groundDetectionDistance = 0.5f;
     private float wallDetectionDistance = 0.5f;
 
+    protected override void Start()
+    {
+        healthBar.SetHealth(currentHealth, maxHealth);
+    }
     private void Update()
     {
         float distanceToPlayer = Vector2.Distance(transform.position, player.position);
-        
+        healthBar.SetHealth(currentHealth, maxHealth);
         if (distanceToPlayer <= explosionRadius)
         {
             // PlayerHealth playerHealth = player.GetComponent<PlayerHealth>();
@@ -28,7 +34,7 @@ public class MeleeEnemyAI : EnemyAI
                  playerHealth.TakeDamage(1); //TODO: change this to explosion damage
              }*/
             playerData.player.health -= damage;
-
+            
             Die();
         }
         else if (distanceToPlayer <= detectionRadius)

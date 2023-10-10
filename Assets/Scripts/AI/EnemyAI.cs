@@ -2,19 +2,25 @@ using UnityEngine;
 
 public class EnemyAI : MonoBehaviour
 {
-    public int health = 2;
+    public int currentHealth = 2;
+    public int maxHealth = 2;
+  
     public GameObject deathEffectPrefab;
 
+    protected virtual void Start()
+    {
+        currentHealth = maxHealth;
+    }
     public void TakeDamage(int damage) //TODO: change this to bullet damage
     {
-        health -= damage;
+        currentHealth -= damage;
 
-        if (health == 1) // After the first shot
+        if (currentHealth == 1) // After the first shot
         {
             StartCoroutine(FlashRed());
         }
 
-        if (health <= 0)
+        if (currentHealth <= 0)
         {
             Die();
         }
