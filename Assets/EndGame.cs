@@ -7,6 +7,7 @@ using UnityEditor;
 
 public class EndGame : MonoBehaviour
 {
+    [SerializeField] PlayerData playerData;
     // Start is called before the first frame update
     void Start()
     {
@@ -15,7 +16,11 @@ public class EndGame : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+      if(playerData.player.health <= 0)
+        {
+        Application.Quit();
+        EditorApplication.isPlaying = false;
+      }
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
