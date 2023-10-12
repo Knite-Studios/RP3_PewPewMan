@@ -29,7 +29,7 @@ public class Gun : MonoBehaviour
 
     private void HandleShooting()
     {
-        if (Input.GetButtonDown("Fire1") && !isReloading)
+        if (Input.GetButtonDown("Shoot") && !isReloading)
         {
             shotCount++;
             GameObject bullet = Instantiate(bulletPrefab, barrel.position, barrel.rotation);

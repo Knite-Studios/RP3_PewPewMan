@@ -8,7 +8,7 @@ public class LadderMovement : MonoBehaviour
     private float speed = 8f;
     private bool isLadder;
     private bool isClimbing;
-
+    
    private Rigidbody2D rb;
 
     void Awake()
@@ -19,7 +19,7 @@ public class LadderMovement : MonoBehaviour
     {
         vertical = Input.GetAxisRaw("Vertical");// -1, 0, 1
 
-        if (isLadder && Mathf.Abs(vertical) > 0f)
+        if (isLadder && Mathf.Abs(vertical) >= -1f)
         {
             isClimbing = true;
         }
@@ -43,6 +43,7 @@ public class LadderMovement : MonoBehaviour
         if (collision.CompareTag("Ladder"))
         {
             isLadder = true;
+            isClimbing = true;
         }
     }
 
@@ -53,5 +54,7 @@ public class LadderMovement : MonoBehaviour
             isLadder = false;
             isClimbing = false;
         }
+       
+
     }
 }
