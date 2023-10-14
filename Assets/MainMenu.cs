@@ -26,7 +26,7 @@ public class MainMenu : Singleton<MainMenu>
             mainMenu.SetActive(true);
             warningMenu.SetActive(false);
         }
-     if(Input.GetKeyDown(KeyCode.J) && mainMenu)
+     if(Input.GetKeyDown(KeyCode.J) && timer > waitTime)
         {
             UnityEngine.SceneManagement.SceneManager.LoadScene(1);
         }
