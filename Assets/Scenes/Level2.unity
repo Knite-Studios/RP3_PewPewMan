@@ -1260,9 +1260,17 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 6921821041339361371, guid: 83c6e1befafa802459ca3ec6295499a9, type: 3}
+      propertyPath: m_Volume
+      value: 0.114
+      objectReference: {fileID: 0}
     - target: {fileID: 6921821042008582356, guid: 83c6e1befafa802459ca3ec6295499a9, type: 3}
       propertyPath: m_Name
       value: '[AudioManager]'
+      objectReference: {fileID: 0}
+    - target: {fileID: 6921821042008582358, guid: 83c6e1befafa802459ca3ec6295499a9, type: 3}
+      propertyPath: m_Volume
+      value: 0.043
       objectReference: {fileID: 0}
     - target: {fileID: 6921821042008582359, guid: 83c6e1befafa802459ca3ec6295499a9, type: 3}
       propertyPath: m_RootOrder
@@ -27714,11 +27722,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4676496279430286820, guid: 63cea03b7e9c4af48bbd5dbb4973069d, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -53.94
+      value: -53.940002
       objectReference: {fileID: 0}
     - target: {fileID: 4676496279430286820, guid: 63cea03b7e9c4af48bbd5dbb4973069d, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -3.0199966
+      value: -3.019989
       objectReference: {fileID: 0}
     - target: {fileID: 4676496279430286820, guid: 63cea03b7e9c4af48bbd5dbb4973069d, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -29419,7 +29427,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 1.300003, y: -0.9000015}
+  m_AnchoredPosition: {x: 1.300003, y: -0.8999939}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2125398764
