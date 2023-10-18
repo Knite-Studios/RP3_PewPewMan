@@ -31,6 +31,7 @@ public class Gun : MonoBehaviour
     {
         if (Input.GetButtonDown("Shoot") && !isReloading)
         {
+            AudioManager.Instance.PlayGunShot();
             shotCount++;
             GameObject bullet = Instantiate(bulletPrefab, barrel.position, barrel.rotation);
             Destroy(bullet, 2f);
@@ -50,10 +51,12 @@ public class Gun : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.R) || (shotCount >= _maxAmmo && !isReloading))
         {
             isReloading = true;
+            AudioManager.Instance.PlayReload();
         }
 
         if (isReloading)
         {
+           
             timer += Time.deltaTime;
 
             if (timer >= reloadTime)
