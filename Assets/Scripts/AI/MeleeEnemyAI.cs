@@ -6,7 +6,7 @@ public class MeleeEnemyAI : EnemyAI
     public float detectionRadius = 5f;
     public float explosionRadius = 1f;
     private bool isFacingRight = true;
-    [SerializeField] int damage = 50;
+    [SerializeField] int damage = 35;
 
     [SerializeField] PlayerData playerData;
     [SerializeField] private Transform player;
