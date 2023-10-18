@@ -3,7 +3,7 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using System.Collections;
 
-public class LoadingScreen : MonoBehaviour
+public class LoadingScreen1 : MonoBehaviour
 {
     public Slider loadingSlider;
     public float fakeLoadingSpeed = 0.2f;
