@@ -10,6 +10,8 @@ public class AudioManager : Singleton<AudioManager>
     AudioClip _gunShot;
     [SerializeField]
     AudioClip _reload;
+    [SerializeField]
+    AudioClip _boom;
     void Awake()
     {
       speaker = GetComponent<AudioSource>();
@@ -24,6 +26,11 @@ public class AudioManager : Singleton<AudioManager>
     public void PlayReload()
     {
         speaker.clip = _reload;
+        speaker.Play();
+    }
+    public void PlayExplode()
+    {
+        speaker.clip = _boom;
         speaker.Play();
     }
 

@@ -39,6 +39,7 @@ public class EnemyAI : MonoBehaviour
 
     protected virtual void Die()
     {
+        AudioManager.Instance.PlayExplode();
         Instantiate(deathEffectPrefab, transform.position, Quaternion.identity);
         Destroy(gameObject);
     }
